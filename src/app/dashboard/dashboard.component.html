@@ -3,10 +3,17 @@
 <table class="table">
     <thead>
         <th>Tarefa</th>
+        <th>Ações</th>
     </thead>
     <tbody>
         <tr *ngFor="let task of tasks">
             <td>{{ task.title }}</td>
+            <td>
+                <a [routerLink]="['/tasks',task.id]" class="btn btn-info">
+                <span class="glyphicon glyphicon-info-sign"></span>
+                    Detalhes
+                </a>
+            </td>
         </tr>
     </tbody>
 </table>
