@@ -1,4 +1,4 @@
-import { Http } from "@angular/http";
+import { Http, Response, Headers } from "@angular/http";
 import { Injectable } from '@angular/core';
 
 import { Task } from './task.model';
@@ -7,8 +7,6 @@ import { Observable } from "rxjs/Observable";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
 import "rxjs/add/observable/throw";
-
-import { Response } from "@angular/http/src/static_response";
 
 
 @Injectable()
@@ -38,6 +36,16 @@ export class TaskService{
         .map( (response: Response) => response.json() as Task);
     }
     
+    public updateTask(task: Task): Observable<Task>{
+        let url = `${this.taskUrl}/${task.id}`;
+        let body = JSON.stringify(task);
+        let headers = new Headers({'Content-type': 'application/json'});
+
+        return this.http.put(url, body, {headers: headers})
+            .catch(this.hendleErrors)
+            .map(()=>task);
+    }
+
     private hendleErrors(error: Response) {
         console.log("Salvando em algum lugar o erro", error);
         return Observable.throw(error);
