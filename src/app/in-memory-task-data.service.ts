@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 
 import { InMemoryDbService } from 'angular-in-memory-web-api';
+import { Task } from "./tasks/shared/task.model";
 
 @Injectable()
 
@@ -20,6 +21,6 @@ export class InMemoryTaskDataService implements InMemoryDbService
             { id: 6, title:"Fazer Tarefa 6" },
             { id: 7, title:"Fazer Tarefa 7" }  
         ];
-        return tasks;
+        return {tasks};
     }
 }

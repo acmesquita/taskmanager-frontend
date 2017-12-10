@@ -17,8 +17,7 @@ export class TasksComponent implements OnInit{
 
     public ngOnInit(): void {
       this.taskService.getTasks()
-        .then((tasks) => this.tasks = tasks)
-        .catch((erro_msg) => alert(erro_msg))
+        .subscribe(tasks => this.tasks = tasks, error => alert(error));
     }
 
     public onSelect(task: Task): void{
