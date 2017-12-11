@@ -7,10 +7,7 @@ import { TaskService } from "../../tasks/shared/task.service";
 import { Subject } from "rxjs/Subject";
 import { OnInit } from "@angular/core/src/metadata/lifecycle_hooks";
 import { Observable } from "rxjs/Observable";
-import "rxjs/add/observable/of";
-import "rxjs/add/operator/debounceTime";
-import "rxjs/add/operator/do";
-import "rxjs/add/operator/distinctUntilChanged";
+
 
 
 @Component({
