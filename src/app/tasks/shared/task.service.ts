@@ -56,6 +56,16 @@ export class TaskService{
             .map(()=>task);
     }
 
+    public deleteTask(id: number): Observable<null>{
+        let url = `${this.taskUrl}/${id}`;
+        let headers = new Headers({'Content-type': 'application/json'});
+
+        return this.http.delete(url, {headers:headers})
+            .catch(this.hendleErrors)
+            .map(()=>null)
+
+    }
+
     private hendleErrors(error: Response) {
         console.log("Salvando em algum lugar o erro", error);
         return Observable.throw(error);
