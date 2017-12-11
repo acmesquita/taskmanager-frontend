@@ -13,13 +13,13 @@ export class InMemoryTaskDataService implements InMemoryDbService
      */
     public createDb() {
         let tasks = [            
-            { id: 1, title:"Fazer Tarefa 1" },
-            { id: 2, title:"Fazer Tarefa 2" },
-            { id: 3, title:"Fazer Tarefa 3" },
-            { id: 4, title:"Fazer Tarefa 4" },
-            { id: 5, title:"Fazer Tarefa 5" },
-            { id: 6, title:"Fazer Tarefa 6" },
-            { id: 7, title:"Fazer Tarefa 7" }  
+            { id: 1, title:"Comprar uma carne para o almoço" },
+            { id: 2, title:"Fazer lições de casa." },
+            { id: 3, title:"Varrer o quintal" },
+            { id: 4, title:"Visita ao hospital infantil" },
+            { id: 5, title:"Comprar uma passagem para Recife." },
+            { id: 6, title:"Entregar o dinheiro no comercio do Seu Ze" },
+            { id: 7, title:"Fazer uma fachina no quarto" }  
         ];
         return {tasks};
     }

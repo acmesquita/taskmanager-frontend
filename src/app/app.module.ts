@@ -17,6 +17,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { TaskDetailComponent } from './tasks/task-detail/task-detail.component';
+import { TaskSearchComponent } from './navbar/task-search/task-search.component';
 
 //Services
 import { TaskService } from './tasks/shared/task.service';
@@ -27,7 +28,8 @@ import { TaskService } from './tasks/shared/task.service';
     DashboardComponent,
     NavbarComponent,
     TasksComponent,
-    TaskDetailComponent
+    TaskDetailComponent,
+    TaskSearchComponent
   ],
   imports: [
     BrowserModule,
