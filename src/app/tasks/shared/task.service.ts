@@ -64,6 +64,14 @@ export class TaskService{
 
     }
 
+    public searchByTitle(title: String): Observable<Task[]>{
+        let url = `${this.taskUrl}?title=${title}`
+
+        return this.http.get(url)
+                .catch(this.hendleErrors)
+                .map((response: Response) => response.json() as Task[]);
+    }
+
     private hendleErrors(error: Response) {
         console.log("Salvando em algum lugar o erro", error);
         return Observable.throw(error);

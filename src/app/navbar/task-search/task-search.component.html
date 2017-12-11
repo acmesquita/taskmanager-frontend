@@ -1,14 +1,11 @@
 <div style="position:relative">
     <div class="form-group">
-      <input type="text" class="form-control" placeholder="Buscar Tarefas">
+      <input #searchInput type="text" class="form-control" placeholder="Buscar Tarefas" 
+      (keyup)="search(searchInput.value)" >
     </div>
 
-    <div class="list-group" style="position:absolute; width: 100%; left: 0; top: 35px; z-index:1000">
-        <a href="#" class="list-group-item">Tarefa 01</a>
-        <a href="#" class="list-group-item">Tarefa 02</a>
-        <a href="#" class="list-group-item">Tarefa 03</a>
-        <a href="#" class="list-group-item">Tarefa 04</a>        
-        <a href="#" class="list-group-item">Tarefa 05</a>        
+    <div *ngIf="tasks" class="list-group" style="position:absolute; width: 100%; left: 0; top: 35px; z-index:1000">
+        <a style="cursor: pointer" *ngFor="let task of tasks" (click)="goToTask(task)" class="list-group-item">{{ task.title }}</a>       
     </div>
 
 </div>
