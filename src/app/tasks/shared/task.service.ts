@@ -13,54 +13,52 @@ import "rxjs/add/observable/throw";
 export class TaskService{
     
     public taskUrl = "api/tasks";
+    public headers = new Headers({'Content-type': 'application/json'});
     
     public constructor(
         private http: Http
     ){}
     
-    public getTasks(): Observable<Task[]>{
+    public getAll(): Observable<Task[]>{
         return this.http.get(this.taskUrl)
         .catch(this.hendleErrors)
         .map( (response: Response) => response.json() as Task[]);
     }
     
-    public getImportanteTasks(): Observable<Task[]>{
-        return this.getTasks()
+    public getImportant(): Observable<Task[]>{
+        return this.getAll()
         .map(tasks => tasks.slice(0,4));
     }
     
-    public getTask(id: number): Observable<Task>{
+    public getById(id: number): Observable<Task>{
         let url = `${this.taskUrl}/${id}`
         return this.http.get(url)
         .catch(this.hendleErrors)
         .map( (response: Response) => response.json() as Task);
     }
 
-    public createTask(task: Task): Observable<Task>{
+    public create(task: Task): Observable<Task>{
         let url = this.taskUrl;
         let body = JSON.stringify(task);
-        let headers = new Headers({'Content-type': 'application/json'});
-
-        return this.http.post(url, body, {headers:headers})
+        
+        return this.http.post(url, body, {headers:this.headers})
             .catch(this.hendleErrors)  
             .map((respose: Response)=> respose.json() as Task)
     }
     
-    public updateTask(task: Task): Observable<Task>{
+    public update(task: Task): Observable<Task>{
         let url = `${this.taskUrl}/${task.id}`;
         let body = JSON.stringify(task);
-        let headers = new Headers({'Content-type': 'application/json'});
 
-        return this.http.put(url, body, {headers: headers})
+        return this.http.put(url, body, {headers: this.headers})
             .catch(this.hendleErrors)
             .map(()=>task);
     }
 
-    public deleteTask(id: number): Observable<null>{
+    public delete(id: number): Observable<null>{
         let url = `${this.taskUrl}/${id}`;
-        let headers = new Headers({'Content-type': 'application/json'});
 
-        return this.http.delete(url, {headers:headers})
+        return this.http.delete(url, {headers:this.headers})
             .catch(this.hendleErrors)
             .map(()=>null)
 
