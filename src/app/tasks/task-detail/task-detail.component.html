@@ -4,7 +4,7 @@
   <div class="row">
     <div class="form-group col-md-6 has-feedback" [class.has-error]="showFieldError(title)" [class.has-success]="title.valid" >
       <label for="title" class="control-label">Título</label>
-      <input #title="ngModel" [(ngModel)]="task.title" class="form-control" type="text" name="title" id="title" required minlength="3" maxlength="15">
+      <input #title="ngModel" [(ngModel)]="task.title" class="form-control" type="text" name="title" id="title" required minlength="3" maxlength="255">
       <span class="glyphicon form-control-feedback" 
         [class.glyphicon-ok]="title.valid" 
         [class.glyphicon-remove]="showFieldError(title)"
@@ -13,7 +13,7 @@
         <div *ngIf="showFieldError(title)" class="text-danger">
           <div *ngIf="title.errors.required">O título é obrigatório.</div>
           <div *ngIf="title.errors.minlength">O título deve possuir no mínimo 3 caracteres.</div>
-          <div *ngIf="title.errors.maxlength">O título deve possuir no mínimo 15 caracteres.</div>
+          <div *ngIf="title.errors.maxlength">O título deve possuir no mínimo 255 caracteres.</div>
         </div>
     </div>
 
