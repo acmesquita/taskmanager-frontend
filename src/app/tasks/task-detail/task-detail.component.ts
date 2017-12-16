@@ -36,19 +36,19 @@ export class TaskDetailComponent implements OnInit{
         this.task = new Task(null, "");
         this.route.params
         .switchMap((params: Params)=>this.taskService.getById(+params['id']))
-        .subscribe(task => this.task = task, error => alert("Ocorreu um erro no servidor."))
+        .subscribe(task => this.setTask(task), error => alert("Ocorreu um erro no servidor."))
         
     }
 
     public ngAfterContentInit() {
         //Called after ngOnInit when the component's or directive's content has been initialized.
         //Add 'implements AfterContentInit' to the class.
-        // $("#deadline").datetimepicker(
-        //     {
-        //         'sideBySide':true,
-        //         'locale':'pt-br'
-        //     }
-        // ).on('dp.change', ()=> this.task.deadline = $("#deadline").val().toString());
+        $("#deadline").datetimepicker(
+            {
+                'sideBySide':true,
+                'locale':'pt-br'
+            }
+        ).on('dp.change', ()=> this.reactiveTaskForm.get('deadline').setValue($("#deadline").val().toString()));
     }
 
     public goBack(){
@@ -65,6 +65,24 @@ export class TaskDetailComponent implements OnInit{
 
     public showFieldError(field): boolean{
         return field.invalid && (field.touched || field.dirty)
+    }
+
+    setTask(task: Task): void {
+        this.task = task;
+
+        // //set Value
+        // let formModel = {
+        //     title: task.title || null,
+        //     deadline: task.deadline || null,
+        //     done: task.done || null,
+        //     description: task.description || null,            
+        // }
+        // this.reactiveTaskForm.setValue(formModel);
+
+        //patch Value
+
+        this.reactiveTaskForm.patchValue(task);
+
     }
 
 }
