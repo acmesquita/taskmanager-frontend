@@ -59,6 +59,11 @@ export class TaskDetailComponent implements OnInit{
     }
 
     public updateTask(){
+        this.task.title = this.reactiveTaskForm.get('title').value;
+        this.task.deadline = this.reactiveTaskForm.get('deadline').value;
+        this.task.done = this.reactiveTaskForm.get('done').value;
+        this.task.description = this.reactiveTaskForm.get('description').value;
+
         this.taskService.update(this.task)
             .subscribe(
                 ()=>alert("Deu certo"),
