@@ -29,6 +29,9 @@ import "rxjs/add/operator/distinctUntilChanged";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/switchMap";
 
+//jQuery plugins
+import * as $ from 'jquery';
+
 // rxjs extensions
 import "rxjs/add/observable/of";
 import "rxjs/add/observable/throw";

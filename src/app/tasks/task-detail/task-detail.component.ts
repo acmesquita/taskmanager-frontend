@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 
@@ -27,6 +27,12 @@ export class TaskDetailComponent implements OnInit{
         this.route.params
         .switchMap((params: Params)=>this.taskService.getById(+params['id']))
         .subscribe(task => this.task = task, error => alert("Ocorreu um erro no servidor."))
+        
+    }
+
+    public ngAfterContentInit() {
+        //Called after ngOnInit when the component's or directive's content has been initialized.
+        //Add 'implements AfterContentInit' to the class.
         
     }
 
