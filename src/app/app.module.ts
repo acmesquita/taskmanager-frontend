@@ -31,6 +31,7 @@ import "rxjs/add/operator/switchMap";
 
 //jQuery plugins
 import * as $ from 'jquery';
+import * as datetimepicker from 'eonasdan-bootstrap-datetimepicker'
 
 // rxjs extensions
 import "rxjs/add/observable/of";

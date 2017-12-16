@@ -24,6 +24,7 @@ export class TaskDetailComponent implements OnInit{
     ){ }
 
     public ngOnInit(){
+        this.task = new Task(null, "");
         this.route.params
         .switchMap((params: Params)=>this.taskService.getById(+params['id']))
         .subscribe(task => this.task = task, error => alert("Ocorreu um erro no servidor."))
@@ -33,7 +34,12 @@ export class TaskDetailComponent implements OnInit{
     public ngAfterContentInit() {
         //Called after ngOnInit when the component's or directive's content has been initialized.
         //Add 'implements AfterContentInit' to the class.
-        
+        $("#deadline").datetimepicker(
+            {
+                'sideBySide':true,
+                'locale':'pt-br'
+            }
+        ).on('dp.change', ()=> this.task.deadline = $("#deadline").val().toString());
     }
 
     public goBack(){
