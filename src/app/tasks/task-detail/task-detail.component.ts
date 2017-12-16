@@ -29,7 +29,11 @@ export class TaskDetailComponent implements OnInit{
             title: [null],
             deadline: [null],
             done: [null],
-            description: [null]
+            description: [null],
+            user: this.formBuilder.group({
+                name: ["nome do usuário"],
+                email: ["email@teste.com"]
+            })
         })
      }
 
