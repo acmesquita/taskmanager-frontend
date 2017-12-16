@@ -47,15 +47,11 @@ export class TaskDetailComponent implements OnInit{
     }
 
     public updateTask(){
-        if(!this.task.title){
-            alert("A tarefa deve ter um título.")
-        }else{
-            this.taskService.update(this.task)
-                .subscribe(
-                    ()=>alert("Deu certo"),
-                    () => alert("Deu erro")
-                )
-        }
+        this.taskService.update(this.task)
+            .subscribe(
+                ()=>alert("Deu certo"),
+                () => alert("Deu erro")
+            )
     }
 
     public showFieldError(field): boolean{
