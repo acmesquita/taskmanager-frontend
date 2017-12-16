@@ -1,6 +1,34 @@
 <h1 class="page-header">Detalhes da Tarefa: {{ task.title }}</h1>
 
-<form #taskForm="ngForm" (ngSubmit)="updateTask()">
+<form [formGroup]="reactiveTaskForm">
+  <div class="row">
+    <div class="form-group col-md-6">
+      <label for="title" class="control-label">Título</label>
+      <input type="text" id="title" formControlName="title" class="form-control">
+    </div>
+    <div class="form-group col-md-3">
+      <label for="deadline" class="control-label">Prazo de Entrega</label>
+      <input type="text" id="deadline" formControlName="deadline" class="form-control">
+    </div>
+    <div class="form-group col-md-3">
+      <label for="done" class="control-label">Situação</label>
+      <select class="form-control" type="text" id="done" formControlName="done">
+        <option *ngFor="let opt of taskDoneOptions" [value]="opt.value">{{ opt.text }}</option>
+      </select> 
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-md-12">
+      <label for="description" class="control-label">Descrição</label>
+      <textarea id="description" formControlName="description" rows=4 class="form-control"></textarea>
+    </div>
+  </div>
+
+  <pre>{{ task | json }}</pre>
+  <pre>{{ reactiveTaskForm.value | json }}</pre>
+</form>
+
+<!-- <form #taskForm="ngForm" (ngSubmit)="updateTask()">
   <div class="row">
     <div class="form-group col-md-6 has-feedback" [class.has-error]="showFieldError(title)" [class.has-success]="title.valid" >
       <label for="title" class="control-label">Título</label>
@@ -56,5 +84,5 @@
 
   <pre>{{ task | json }}</pre>
 
-</form>
+</form> -->
 
