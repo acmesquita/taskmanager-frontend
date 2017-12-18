@@ -18,6 +18,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { TaskDetailComponent } from './tasks/task-detail/task-detail.component';
 import { TaskSearchComponent } from './navbar/task-search/task-search.component';
+import { SignUpFormComponent } from './sign-up-form/sign-up-form.component';
 
 //Services
 import { TaskService } from './tasks/shared/task.service';
@@ -44,7 +45,8 @@ import "rxjs/add/observable/throw";
     NavbarComponent,
     TasksComponent,
     TaskDetailComponent,
-    TaskSearchComponent
+    TaskSearchComponent,
+    SignUpFormComponent
   ],
   imports: [
     BrowserModule,
