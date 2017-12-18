@@ -22,6 +22,6 @@ export class SignUpFormComponent{
 
     public signUpUser(){
         console.log("Form Sign Up enviado");
-        console.log(this.userForm.value)
+        console.log(this.userForm.value);
     }
 }
