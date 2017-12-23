@@ -20,6 +20,9 @@ import { TaskSearchComponent } from './navbar/task-search/task-search.component'
 import { AuthService } from './shared/auth.service';
 import { TaskService } from './tasks/shared/task.service';
 
+//guards imports
+import { AuthGuard } from "./guard/auth.guard";
+
 // angular plugin imports
 import { Angular2TokenService } from "angular2-token";
 
@@ -56,7 +59,7 @@ import "rxjs/add/observable/throw";
     HttpModule,
     AppRoutingModule
   ],
-  providers: [  Angular2TokenService, AuthService, TaskService ],
+  providers: [  AuthGuard,Angular2TokenService, AuthService, TaskService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

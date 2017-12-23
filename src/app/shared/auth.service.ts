@@ -26,9 +26,10 @@ export class AuthService{
         //return Observable<Response>
     }
 
-    public userSignedIn(){
+    public userSignedIn():boolean{
         //call Angular2-Token userSignedIn methed here!
-        //return a Boolean        
+        // return a Boolean 
+        return this.tokenService.userSignedIn();
     }
 
     private hendleErrors(error: Response) {
