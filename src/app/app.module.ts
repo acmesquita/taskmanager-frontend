@@ -23,6 +23,9 @@ import { TaskSearchComponent } from './navbar/task-search/task-search.component'
 //Services
 import { TaskService } from './tasks/shared/task.service';
 
+// angular plugin imports
+import { Angular2TokenService } from "angular2-token";
+
 // rxjs operators
 import "rxjs/add/operator/catch";
 import "rxjs/add/operator/debounceTime";
@@ -57,7 +60,7 @@ import "rxjs/add/observable/throw";
     AppRoutingModule,
     InMemoryWebApiModule.forRoot(InMemoryTaskDataService)
   ],
-  providers: [ TaskService ],
+  providers: [  Angular2TokenService, TaskService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
