@@ -14,7 +14,7 @@ export class SignInFormComponent{
 
     public constructor(private formBuilder: FormBuilder){
         this.form = this.formBuilder.group({
-            email: [null, [Validators.required, Validators.email]],
+            email: [null, [Validators.required, Validators.email, Validators.minLength(8)]],
             password: [null, [Validators.required]]
         });
 
