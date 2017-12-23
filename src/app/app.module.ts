@@ -21,6 +21,7 @@ import { TasksComponent } from './tasks/tasks.component';
 import { TaskDetailComponent } from './tasks/task-detail/task-detail.component';
 import { TaskSearchComponent } from './navbar/task-search/task-search.component';
 //Services
+import { AuthService } from './shared/auth.service';
 import { TaskService } from './tasks/shared/task.service';
 
 // angular plugin imports
@@ -60,7 +61,7 @@ import "rxjs/add/observable/throw";
     AppRoutingModule,
     InMemoryWebApiModule.forRoot(InMemoryTaskDataService)
   ],
-  providers: [  Angular2TokenService, TaskService ],
+  providers: [  Angular2TokenService, AuthService, TaskService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
