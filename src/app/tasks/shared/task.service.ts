@@ -4,9 +4,6 @@ import { Injectable } from '@angular/core';
 import { Task } from './task.model';
 import { Observable } from "rxjs/Observable";
 
-
-
-
 @Injectable()
 export class TaskService{
     
