@@ -10,7 +10,7 @@ import { FormUtils } from "../shared/form.utils";
 export class SignInFormComponent{
 
     public form: FormGroup;
-    public formUtil: FormUtils;
+    public formUtils: FormUtils;
 
     public constructor(private formBuilder: FormBuilder){
         this.form = this.formBuilder.group({
@@ -18,7 +18,7 @@ export class SignInFormComponent{
             password: [null, [Validators.required]]
         });
 
-        this.formUtil = new FormUtils(this.form);
+        this.formUtils = new FormUtils(this.form);
     }
 
     public signInUser(){
