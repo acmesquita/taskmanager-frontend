@@ -15,11 +15,11 @@ import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { SignInFormComponent } from './sign-in-form/sign-in-form.component';
 import { SignUpFormComponent } from './sign-up-form/sign-up-form.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { TaskDetailComponent } from './tasks/task-detail/task-detail.component';
 import { TaskSearchComponent } from './navbar/task-search/task-search.component';
-
 //Services
 import { TaskService } from './tasks/shared/task.service';
 
@@ -43,6 +43,7 @@ import "rxjs/add/observable/throw";
     AppComponent,
     DashboardComponent,
     NavbarComponent,
+    SignInFormComponent,
     SignUpFormComponent,
     TasksComponent,
     TaskDetailComponent,
