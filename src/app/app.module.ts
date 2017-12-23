@@ -4,10 +4,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-//Angular in memory
-import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryTaskDataService } from './in-memory-task-data.service';
-
 //Modules
 import { AppRoutingModule } from './app-routing.module'
 
@@ -58,8 +54,7 @@ import "rxjs/add/observable/throw";
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
-    AppRoutingModule,
-    InMemoryWebApiModule.forRoot(InMemoryTaskDataService)
+    AppRoutingModule
   ],
   providers: [  Angular2TokenService, AuthService, TaskService ],
   bootstrap: [AppComponent]

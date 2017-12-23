@@ -7,7 +7,7 @@ import { Observable } from "rxjs/Observable";
 @Injectable()
 export class TaskService{
     
-    public taskUrl = "api/tasks";
+    public taskUrl = "http://api.task-manager.dev:3000/tasks";
     public headers = new Headers({'Content-type': 'application/json'});
     
     public constructor(
