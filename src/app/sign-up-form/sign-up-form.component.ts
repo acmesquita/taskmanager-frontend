@@ -9,6 +9,7 @@ import { FormUtils } from "../shared/form.utils";
 })
 
 export class SignUpFormComponent{
+   
     private form: FormGroup;
     private formUtils: FormUtils;
 
@@ -20,12 +21,21 @@ export class SignUpFormComponent{
             email: [null, [Validators.required, Validators.email]],
             password: [null, [Validators.required, Validators.minLength(8)]],
             passwordConfirmation: [null, [Validators.required]]
-        });
+        },{ validator: this.passwordConfirmationValidator});
         this.formUtils = new FormUtils(this.form);
     }
 
     public signUpUser(){
         console.log("Form Sign Up enviado");
         console.log(this.form.value);
+    }
+
+    private passwordConfirmationValidator(formGroup: FormGroup): any {
+        if(formGroup.get('password').dirty && formGroup.get('passwordConfirmation').dirty && formGroup.get('password').value === formGroup.get('passwordConfirmation').value){
+            formGroup.get('passwordConfirmation').setErrors(null);
+        }
+        else{
+            formGroup.get('passwordConfirmation').setErrors({'mismatch':true});            
+        }
     }
 }
