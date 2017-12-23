@@ -1,37 +1,37 @@
 <h1 class="page-header">Detalhes da Tarefa: {{ task.title }}</h1>
 
-<form [formGroup]="reactiveTaskForm" (ngSubmit)="updateTask()">
+<form [formGroup]="form" (ngSubmit)="updateTask()">
   <div class="row">
     <!-- Field Title-->
-    <div class="form-group col-md-6 has-feedback" [ngClass]="fieldClassForErrorOrSuccess('title')" >
+    <div class="form-group col-md-6 has-feedback" [ngClass]="formUtils.fieldClassForErrorOrSuccess('title')" >
       <label for="title" class="control-label">Título</label>
       <input type="text" id="title" formControlName="title" class="form-control">
-      <span class="glyphicon form-control-feedback" [ngClass]="iconClassForErrorOrSuccess('title')" ></span>
-      <div *ngIf="showFieldError('title')" class="text-danger">
-        <div *ngIf="getField('title').errors.required">O título é obrigatório.</div>
-        <div *ngIf="getField('title').errors.minlength">O título deve possuir no mínimo 2 caracteres.</div>
-        <div *ngIf="getField('title').errors.maxlength">O título deve possuir no mínimo 255 caracteres.</div>
+      <span class="glyphicon form-control-feedback" [ngClass]="formUtils.iconClassForErrorOrSuccess('title')" ></span>
+      <div *ngIf="formUtils.showFieldError('title')" class="text-danger">
+        <div *ngIf="form.get('title').errors.required">O título é obrigatório.</div>
+        <div *ngIf="form.get('title').errors.minlength">O título deve possuir no mínimo 2 caracteres.</div>
+        <div *ngIf="form.get('title').errors.maxlength">O título deve possuir no mínimo 255 caracteres.</div>
       </div>
     </div>
     <!-- Field Deadline-->
-    <div class="form-group col-md-3 has-feedback" [ngClass]="fieldClassForErrorOrSuccess('deadline')" >
+    <div class="form-group col-md-3 has-feedback" [ngClass]="formUtils.fieldClassForErrorOrSuccess('deadline')" >
       <label for="deadline" class="control-label">Prazo de Entrega</label>
       <input type="text" id="deadline" formControlName="deadline" class="form-control">
       <span class="glyphicon form-control-feedback" 
-        [ngClass]="iconClassForErrorOrSuccess('deadline')"
+        [ngClass]="formUtils.iconClassForErrorOrSuccess('deadline')"
         style="margin-right: 20px;" ></span>
-      <div *ngIf="showFieldError('deadline')" class="text-danger">O prazo é obrigatório</div>
+      <div *ngIf="formUtils.showFieldError('deadline')" class="text-danger">O prazo é obrigatório</div>
     </div>
     <!-- Field done-->
-    <div class="form-group col-md-3 has-feedback" [ngClass]="fieldClassForErrorOrSuccess('done')" >
+    <div class="form-group col-md-3 has-feedback" [ngClass]="formUtils.fieldClassForErrorOrSuccess('done')" >
       <label for="done" class="control-label">Situação</label>
       <select class="form-control" type="text" id="done" formControlName="done">
         <option *ngFor="let opt of taskDoneOptions" [value]="opt.value">{{ opt.text }}</option>
       </select> 
       <span class="glyphicon form-control-feedback" 
-        [ngClass]="iconClassForErrorOrSuccess('done')"
+        [ngClass]="formUtils.iconClassForErrorOrSuccess('done')"
         style="margin-right: 20px;" ></span>
-      <div *ngIf="showFieldError('done')" class="text-danger">A situação é obrigatória</div>
+      <div *ngIf="formUtils.showFieldError('done')" class="text-danger">A situação é obrigatória</div>
     </div>
 
   </div>
@@ -43,7 +43,7 @@
     </div>
   </div>
 
-  <button [disabled]="reactiveTaskForm.invalid" type="submit" class="btn btn-success">Atualizar</button>
+  <button [disabled]="form.invalid" type="submit" class="btn btn-success">Atualizar</button>
   <button type="button" class="btn btn-default" (click)="goBack()" >Voltar</button>
 
 </form>

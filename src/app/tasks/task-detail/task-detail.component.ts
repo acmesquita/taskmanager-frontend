@@ -3,6 +3,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 
+import { FormUtils } from '../../shared/form.utils'
 import { Task } from '../shared/task.model';
 import { TaskService } from '../shared/task.service';
 
@@ -13,9 +14,10 @@ import { TaskService } from '../shared/task.service';
 })
 
 export class TaskDetailComponent implements OnInit{
-    public reactiveTaskForm: FormGroup;
+    public form: FormGroup;
     public task: Task;
     public taskDoneOptions: Array<any>;
+    public formUtils: FormUtils
 
     public constructor(
         private taskService: TaskService,
@@ -28,7 +30,7 @@ export class TaskDetailComponent implements OnInit{
             {value: true, text:"Realizada"}
         ];
 
-        this.reactiveTaskForm = this.formBuilder.group({
+        this.form = this.formBuilder.group({
             title: [null, [Validators.required,
                            Validators.maxLength(255), 
                            Validators.minLength(2)]],
@@ -36,6 +38,8 @@ export class TaskDetailComponent implements OnInit{
             done: [null, Validators.required],
             description: [null]
         });
+
+        this.formUtils = new FormUtils(this.form);
      }
 
     public ngOnInit(){
@@ -54,7 +58,7 @@ export class TaskDetailComponent implements OnInit{
                 'sideBySide':true,
                 'locale':'pt-br'
             }
-        ).on('dp.change', ()=> this.reactiveTaskForm.get('deadline').setValue($("#deadline").val().toString()));
+        ).on('dp.change', ()=> this.form.get('deadline').setValue($("#deadline").val().toString()));
     }
 
     public goBack(){
@@ -62,10 +66,10 @@ export class TaskDetailComponent implements OnInit{
     }
 
     public updateTask(){
-        this.task.title = this.reactiveTaskForm.get('title').value;
-        this.task.deadline = this.reactiveTaskForm.get('deadline').value;
-        this.task.done = this.reactiveTaskForm.get('done').value;
-        this.task.description = this.reactiveTaskForm.get('description').value;
+        this.task.title = this.form.get('title').value;
+        this.task.deadline = this.form.get('deadline').value;
+        this.task.done = this.form.get('done').value;
+        this.task.description = this.form.get('description').value;
 
         this.taskService.update(this.task)
             .subscribe(
@@ -77,30 +81,7 @@ export class TaskDetailComponent implements OnInit{
     
     setTask(task: Task): void {
         this.task = task;
-        this.reactiveTaskForm.patchValue(task);
-    }
-    
-    public showFieldError(fieldName: string): boolean{
-        let field = this.getField(fieldName);
-        return field.invalid && (field.touched || field.dirty)
-    }
-    
-    public fieldClassForErrorOrSuccess(fieldName: string): any{
-        return {
-            "has-error": this.showFieldError(fieldName),
-            "has-success": this.getField(fieldName).valid
-        }
-    }
-
-    public iconClassForErrorOrSuccess(fieldName: string): any{
-        return {
-            "glyphicon-remove": this.showFieldError(fieldName),
-            "glyphicon-ok": this.getField(fieldName).valid
-        }
-    }
-
-    public getField(fieldName: string){
-        return this.reactiveTaskForm.get(fieldName);
+        this.form.patchValue(task);
     }
 
 }
