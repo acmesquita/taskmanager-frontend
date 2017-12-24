@@ -11,9 +11,9 @@ export class AuthService{
 
     public constructor(private tokenService: Angular2TokenService){ }
 
-    public signUp(user: User){
-        //call Angular2-Token SignUp methed here!
-        //return Observable<Response>
+    public signUp(user: User):Observable<Response>{
+        return this.tokenService.registerAccount(user as any)
+        .catch(this.hendleErrors);
     }
 
     public singIn(uid: string, password: string){

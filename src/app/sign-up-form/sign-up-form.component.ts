@@ -1,7 +1,10 @@
 import { Component } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
-import { FormUtils } from "../shared/form.utils";
+import { Router } from "@angular/router";
 
+import { AuthService } from "../shared/auth.service";
+import { FormUtils } from "../shared/form.utils";
+import { User } from "../shared/user.model";
 
 @Component({
     selector: 'sign-up-form',
@@ -14,20 +17,22 @@ export class SignUpFormComponent{
     private formUtils: FormUtils;
 
     public constructor(
-        private formBuilder:FormBuilder
+        public authService: AuthService,
+        public formBuilder:FormBuilder,
+        private router: Router
     ){
-        this.form = this.formBuilder.group({
-            name: [null, [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
-            email: [null, [Validators.required, Validators.email]],
-            password: [null, [Validators.required, Validators.minLength(8)]],
-            passwordConfirmation: [null, [Validators.required]]
-        },{ validator: this.passwordConfirmationValidator});
+        this.setupForm();
         this.formUtils = new FormUtils(this.form);
     }
 
     public signUpUser(){
-        console.log("Form Sign Up enviado");
-        console.log(this.form.value);
+        this.authService.signUp(this.form.value as User)
+        .subscribe(
+            () => {
+                alert('Parabéns, sua conta foi criada com sucesso!');
+                this.router.navigate(['dashboard']);
+            }
+        );
     }
 
     private passwordConfirmationValidator(formGroup: FormGroup): any {
@@ -37,5 +42,15 @@ export class SignUpFormComponent{
         else{
             formGroup.get('passwordConfirmation').setErrors({'mismatch':true});            
         }
+    }
+
+    private setupForm(){
+        this.form = this.formBuilder.group({
+            name: [null, [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
+            email: [null, [Validators.required, Validators.email]],
+            password: [null, [Validators.required, Validators.minLength(8)]],
+            passwordConfirmation: [null, [Validators.required]]
+        },{ validator: this.passwordConfirmationValidator});
+
     }
 }
