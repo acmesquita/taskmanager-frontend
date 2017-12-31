@@ -15,6 +15,8 @@ export class SignUpFormComponent{
    
     private form: FormGroup;
     private formUtils: FormUtils;
+    private submitted: boolean;
+    private formErros: Array<string>;
 
     public constructor(
         public authService: AuthService,
@@ -23,14 +25,28 @@ export class SignUpFormComponent{
     ){
         this.setupForm();
         this.formUtils = new FormUtils(this.form);
+        this.submitted = false;
+        this.formErros = null;
     }
 
     public signUpUser(){
+        this.submitted = true;
         this.authService.signUp(this.form.value as User)
         .subscribe(
             () => {
                 alert('Parabéns, sua conta foi criada com sucesso!');
                 this.router.navigate(['dashboard']);
+                this.formErros = null;
+            },
+            (error) =>{
+                this.submitted = false;
+                //Erros nos dados
+                if(error.status === 422){
+                    this.formErros = JSON.parse(error._body).errors.full_messages;
+                    
+                } else {
+                    this.formErros = ["Erro no processamento, tente novamente mais tarde."]
+                }
             }
         );
     }
