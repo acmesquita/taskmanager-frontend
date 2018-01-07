@@ -16,9 +16,16 @@ export class AuthService{
         .catch(this.hendleErrors);
     }
 
-    public singIn(uid: string, password: string){
+    public signIn(uid: string, password: string): Observable<Response>{
         //call Angular2-Token SignIn methed here!
         //return Observable<Response>                
+        let signInData = {
+            email : uid,
+            password : password
+        }
+
+        return this.tokenService.signIn(signInData)
+            .catch(this.hendleErrors);
     }
 
     public signOut(): Observable<Response>{
