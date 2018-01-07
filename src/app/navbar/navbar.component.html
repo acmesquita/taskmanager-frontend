@@ -22,8 +22,15 @@
             <a [routerLink]="['/tasks']">Tarefas</a>
           </li>
         </ul>
-        <div class="navbar-form navbar-right">
+        <div class="navbar-form navbar-left">
           <task-search></task-search>
+        </div>
+
+        <div class="navbar-form navbar-right">
+          <button class="btn btn-danger" (click)="signOutUser()"> 
+            <span class="glyphicon glyphicon-log-out"></span>
+            Sair
+          </button>
         </div>
         
       </div><!-- /.navbar-collapse -->

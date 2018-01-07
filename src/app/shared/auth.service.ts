@@ -21,9 +21,11 @@ export class AuthService{
         //return Observable<Response>                
     }
 
-    public signOut(){
-        //call Angular2-Token SignOut methed here!        
+    public signOut(): Observable<Response>{
+        //call Angular2-Token SignOut methed here!      
         //return Observable<Response>
+        return this.tokenService.signOut()
+        .catch(this.hendleErrors);
     }
 
     public userSignedIn():boolean{
