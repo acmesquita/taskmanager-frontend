@@ -36,7 +36,12 @@
         <div class="form-group">
             <div class="col-sm-offset-4 col-sm-8">
                 <button [disabled]="form.invalid || submitted " type="submit" class="btn btn-primary">Entrar</button>
-        </div>
+            </div>
+            <div class="col-sm-offset-4 col-sm-8">
+                Se você não possui uma conta, 
+                <a routerLink="/sign-up">clique aqui</a>
+            </div>
+            
         </div>
     </form>
 </div>
