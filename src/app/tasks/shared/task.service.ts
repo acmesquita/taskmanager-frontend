@@ -1,51 +1,59 @@
-import { Http, Response, Headers } from "@angular/http";
+import { Response } from "@angular/http";
 import { Injectable } from '@angular/core';
 
 import { Task } from './task.model';
 import { Observable } from "rxjs/Observable";
 
+import { Angular2TokenService } from 'angular2-token'
+
 @Injectable()
 export class TaskService{
     
-    public taskUrl = "http://api.task-manager.dev:3000/tasks";
-    public headers = new Headers({'Content-type': 'application/json'});
-    
+    public taskUrl = "tasks";
+
     public constructor(
-        private http: Http
+        private tokenHttp: Angular2TokenService
     ){}
     
     public getAll(): Observable<Task[]>{
-        return this.http.get(this.taskUrl)
+
+        let url = `${this.taskUrl}?q[s]=update_at+DESC`;
+
+        return this.tokenHttp.get(url)
         .catch(this.hendleErrors)
-        .map( (response: Response) => response.json() as Task[]);
+        .map( (response: Response) => this.responseToTasks(response));
     }
     
     public getImportant(): Observable<Task[]>{
-        return this.getAll()
-        .map(tasks => tasks.slice(0,4));
+
+        let url = `${this.taskUrl}?q[s]=deadline+ASC`;
+         
+        return this.tokenHttp.get(url)
+        .catch(this.hendleErrors)
+        .map( (response: Response) => this.responseToTasks(response));
     }
     
     public getById(id: number): Observable<Task>{
         let url = `${this.taskUrl}/${id}`
-        return this.http.get(url)
+        return this.tokenHttp.get(url)
         .catch(this.hendleErrors)
-        .map( (response: Response) => response.json() as Task);
+        .map( (response: Response) => this.responseToTask(response));
     }
 
     public create(task: Task): Observable<Task>{
         let url = this.taskUrl;
         let body = JSON.stringify(task);
         
-        return this.http.post(url, body, {headers:this.headers})
+        return this.tokenHttp.post(url, body)
             .catch(this.hendleErrors)  
-            .map((respose: Response)=> respose.json() as Task)
+            .map((response: Response)=> this.responseToTask(response));
     }
     
     public update(task: Task): Observable<Task>{
         let url = `${this.taskUrl}/${task.id}`;
         let body = JSON.stringify(task);
 
-        return this.http.put(url, body, {headers: this.headers})
+        return this.tokenHttp.put(url, body)
             .catch(this.hendleErrors)
             .map(()=>task);
     }
@@ -53,22 +61,51 @@ export class TaskService{
     public delete(id: number): Observable<null>{
         let url = `${this.taskUrl}/${id}`;
 
-        return this.http.delete(url, {headers:this.headers})
+        return this.tokenHttp.delete(url)
             .catch(this.hendleErrors)
             .map(()=>null)
 
     }
 
     public searchByTitle(title: String): Observable<Task[]>{
-        let url = `${this.taskUrl}?title=${title}`
+        let url = `${this.taskUrl}?q[title_cont]=${title}`
 
-        return this.http.get(url)
+        return this.tokenHttp.get(url)
                 .catch(this.hendleErrors)
-                .map((response: Response) => response.json() as Task[]);
+                .map((response: Response) => this.responseToTasks(response));
     }
 
     private hendleErrors(error: Response) {
         console.log("Salvando em algum lugar o erro", error);
         return Observable.throw(error);
+    }
+
+    private responseToTasks(response: Response){
+
+        let collection = response.json().data as Array<any>;
+        let tasks :Task[] = [];
+
+        collection.forEach(item=>{
+            let task = new Task(
+                item.id,
+                item.attributes.title,
+                item.attributes.description,
+                item.attributes.done,
+                item.attributes.deadline,                    
+            )
+
+            tasks.push(task);
+        })
+
+        return tasks;
+    }
+
+    private responseToTask(response : Response){
+        let item = response.json().data;
+            return new Task(item.id, 
+                            item.attributes.title,
+                            item.attributes.description,
+                            item.attributes.done,
+                            item.attributes.deadline)
     }
 }
