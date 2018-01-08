@@ -91,7 +91,7 @@ export class TaskService{
                 item.attributes.title,
                 item.attributes.description,
                 item.attributes.done,
-                item.attributes.deadline,                    
+                item.attributes['deadline-to-br'],                    
             )
 
             tasks.push(task);
@@ -102,10 +102,10 @@ export class TaskService{
 
     private responseToTask(response : Response){
         let item = response.json().data;
-            return new Task(item.id, 
-                            item.attributes.title,
-                            item.attributes.description,
-                            item.attributes.done,
-                            item.attributes.deadline)
-    }
+        return new Task(item.id, 
+                        item.attributes.title,
+                        item.attributes.description,
+                        item.attributes.done,
+                        item.attributes['deadline-to-br'])
+}
 }
