@@ -9,6 +9,7 @@
 </div>
 <div class="jumbotron">
     <form class="form-horizontal" [formGroup]="form" (ngSubmit)="signUpUser()">
+        <!-- NAME -->
         <div class="form-group has-feedback" [ngClass]="formUtils.fieldClassForErrorOrSuccess('name')">
             <label for="email" class="col-sm-4 control-label">Nome</label>
             <div class="col-sm-4">
@@ -17,10 +18,11 @@
                 <div *ngIf="formUtils.showFieldError('name')" class="text-danger">
                     <div *ngIf="form.get('name').errors.required">O nome é obrigatório.</div>
                     <div *ngIf="form.get('name').errors.minlength">O nome deve possuir no mínimo 5 caracteres.</div>
-                    <div *ngIf="form.get('name').errors.maxlength">O nome deve possuir no mínimo 100 caracteres.</div>
+                    <div *ngIf="form.get('name').errors.maxlength">O nome deve possuir no máximo 100 caracteres.</div>
                 </div>
             </div>
         </div>
+        <!-- Email -->
         <div class="form-group has-feedback" [ngClass]="formUtils.fieldClassForErrorOrSuccess('email')">
             <label for="email" class="col-sm-4 control-label">Email</label>
             <div class="col-sm-4">
