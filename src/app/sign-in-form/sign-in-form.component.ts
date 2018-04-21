@@ -14,8 +14,8 @@ export class SignInFormComponent{
 
     public form: FormGroup;
     public formUtils: FormUtils;
-    private submitted: boolean;
-    private formErros: Array<string>;
+    public submitted: boolean;
+    public formErros: Array<string>;
 
     public constructor(
         public authService: AuthService,

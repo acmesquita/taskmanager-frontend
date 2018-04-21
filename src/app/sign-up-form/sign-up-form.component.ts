@@ -13,10 +13,10 @@ import { User } from "../shared/user.model";
 
 export class SignUpFormComponent{
    
-    private form: FormGroup;
-    private formUtils: FormUtils;
-    private submitted: boolean;
-    private formErros: Array<string>;
+    public form: FormGroup;
+    public formUtils: FormUtils;
+    public submitted: boolean;
+    public formErros: Array<string>;
 
     public constructor(
         public authService: AuthService,
